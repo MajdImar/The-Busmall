@@ -15,7 +15,11 @@ var images = [
     "unicorn.jpg",
     "usb.gif",
     "water-can.jpg",
-    "wine-glass.jpg"
+    "wine-glass.jpg",
+    "dog-duck.jpg",
+    "cthulhu.jpg",
+    "dragon.jpg",
+    "pen.jpg"
 
 
 ];
@@ -94,7 +98,7 @@ function handleClickOnProduct(event) {
       runder();
     }
   }  else {
-  console.log('more than 25 clicks');
+  alert('more than 25 clicks');
     imageSection.removeEventListener('click',handleClickOnProduct);
     render2();
   }
@@ -108,5 +112,4 @@ function render2() {
     ulE1.appendChild(liE1);
   }
 }
-
 
