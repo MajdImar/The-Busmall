@@ -44,14 +44,20 @@ var leftproduct, centerproduct, rightproduct;
 function runder() {
 
     leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+    //console.log(leftproduct);
     centerproduct = Products.all[randomNumber(0, Products.all.length - 1)];
-    rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
-   while(leftproduct.imagepath==centerproduct.imagePath || rightproduct.imagePath==centerproduct.imagePath ||  leftproduct.imagePath==rightproduct.imagePath ){
-    leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+    //console.log(centerproduct);
+      rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+  
+      while(leftproduct.name===centerproduct.name|| leftproduct.name===rightproduct.name || rightproduct.name===centerproduct.name ){
+   
+        leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
     centerproduct = Products.all[randomNumber(0, Products.all.length - 1)];
     rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
    }
-
+//console.log(leftproduct.imagepath===centerproduct.imagePath );
+//console.log(leftproduct.imagePath===rightproduct.imagePath );
+//console.log(rightproduct.imagePath===centerproduct.imagePath );
     leftImage.setAttribute('src', leftproduct.imagePath);
     leftImage.setAttribute('alt', leftproduct.name);
     leftImage.setAttribute('title', leftproduct.name);
@@ -88,7 +94,7 @@ function handleClickOnProduct(event) {
       runder();
     }
   }  else {
-    console.log('more than 25 clicks');
+  console.log('more than 25 clicks');
     imageSection.removeEventListener('click',handleClickOnProduct);
     render2();
   }
