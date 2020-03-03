@@ -62,9 +62,30 @@ function randomNumber(min, max) {
 
 //   }
 // }
+function updateProducts() {
+  var productupdate= JSON.stringify(Products.all);
+  localStorage.setItem('objectorders', productupdate);
+}
 
 
+function getProducts() {
+  var productupdate = localStorage.getItem('objectorders');
+ 
+  if(productupdate) {
+    Products.all = JSON.parse(productupdate);
+  
+    runder();
+    render3();
+    render2();
 
+  }
+}
+
+
+// function updateDrinks() {
+//   var drinkString = JSON.stringify(Coffee.drinks);
+//   localStorage.setItem('coffeeOrders', drinkString);
+// }
 
 //var imgid = [];
 var leftproduct, centerproduct, rightproduct;
@@ -127,14 +148,16 @@ function handleClickOnProduct(event) {
       leftproduct.views++;
       rightproduct.views++;
       centerproduct.views++;
+      updateProducts() ;
       runder();
     }
   } else {
     alert('more than 25 clicks');
     imageSection.removeEventListener('click', handleClickOnProduct);
-    render2();
+    //render2();
     //takeelement();
     render3();
+    updateProducts() ;
   }
 
 }
@@ -221,3 +244,4 @@ function render3() {
     }
   })
 }
+getProducts();
