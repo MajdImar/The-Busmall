@@ -46,6 +46,26 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// function takeelement(){
+//   var takeobject=JSON.stringify(Products.all);
+ 
+//   localStorage.setItem('Products', takeobject);
+// }
+
+// function getProducts() {
+//   var takeobject = localStorage.getItem('Products');
+ 
+//   if(takeobject) {
+//     Products.all = JSON.parse(takeobject);
+  
+  
+
+//   }
+// }
+
+
+
+
 //var imgid = [];
 var leftproduct, centerproduct, rightproduct;
 function runder() {
@@ -112,21 +132,22 @@ function handleClickOnProduct(event) {
   } else {
     alert('more than 25 clicks');
     imageSection.removeEventListener('click', handleClickOnProduct);
-    // render2();
+    render2();
+    //takeelement();
     render3();
   }
 
 }
 
-// function render2() {
-//   var ulE1 = document.getElementById('Score');
-//   for (var i =0; i<Products.all.length ; i++) {
-//     var liE1 = document.createElement('li');
-//     liE1.textContent = `${Products.all[i].name} has ${Products.all[i].clicks} clicks and ${Products.all[i].views} views`;
-//     ulE1.appendChild(liE1);
-//   }
+function render2() {
+  var ulE1 = document.getElementById('Score');
+  for (var i =0; i<Products.all.length ; i++) {
+    var liE1 = document.createElement('li');
+    liE1.textContent = `${Products.all[i].name} has ${Products.all[i].clicks} clicks and ${Products.all[i].views} views`;
+    ulE1.appendChild(liE1);
+  }
 
-// }
+}
 var contct = [];
 var cliccks = [];
 var names = [];
