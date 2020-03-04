@@ -1,59 +1,229 @@
-'use strict';
 
-// Cart constructor.
-var Cart = function(items) {
-  // this.items is an array of CartItem instances.
-  this.items = items;
-};
+var images = [
+  "bag.jpg",
+  "banana.jpg",
+  "bathroom.jpg",
+  "boots.jpg",
+  "breakfast.jpg",
+  "bubblegum.jpg",
+  "chair.jpg",
+  "pet-sweep.jpg",
+  "scissors.jpg",
+  "shark.jpg",
+  "sweep.png",
+  "tauntaun.jpg",
+  "unicorn.jpg",
+  "usb.gif",
+  "water-can.jpg",
+  "wine-glass.jpg",
+  "dog-duck.jpg",
+  "cthulhu.jpg",
+  "dragon.jpg",
+  "pen.jpg"
 
-Cart.prototype.addItem = function(product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-};
 
-Cart.prototype.saveToLocalStorage = function() {
-  // TODO: Fill in this instance method to save the contents of the cart to localStorage
-};
+];
+var leftImage = document.querySelector('#leftImage');
+var rightImage = document.querySelector('#rightImage');
+var centerImage = document.querySelector('#centerimage');
+var imageSection = document.querySelector('#mainpictures');
 
-Cart.prototype.removeItem = function(item) {
-  // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
-};
 
-var CartItem = function(product, quantity) {
-  this.product = product;
-  this.quantity = quantity;
-};
-
-// Product contructor.
-var Product = function(filePath, name) {
-  this.filePath = filePath;
+function Products(name) {
   this.name = name;
-  Product.allProducts.push(this);
-};
-Product.allProducts = [];
+  this.clicks = 0;
+  this.views = 0;
+  this.imagePath = `images/${this.name}`;
+  Products.all.push(this);
+}
+Products.all = [];
 
-function generateCatalog() {
-  new Product('images/bag.jpg', 'Bag');
-  new Product('images/banana.jpg', 'Banana');
-  new Product('images/bathroom.jpg', 'Bathroom');
-  new Product('images/boots.jpg', 'Boots');
-  new Product('images/breakfast.jpg', 'Breakfast');
-  new Product('images/bubblegum.jpg', 'Bubblegum');
-  new Product('images/chair.jpg', 'Chair');
-  new Product('images/cthulhu.jpg', 'Cthulhu');
-  new Product('images/dog-duck.jpg', 'Dog-Duck');
-  new Product('images/dragon.jpg', 'Dragon');
-  new Product('images/pen.jpg', 'Pen');
-  new Product('images/pet-sweep.jpg', 'Pet Sweep');
-  new Product('images/scissors.jpg', 'Scissors');
-  new Product('images/shark.jpg', 'Shark');
-  new Product('images/sweep.png', 'Sweep');
-  new Product('images/tauntaun.jpg', 'Taun-Taun');
-  new Product('images/unicorn.jpg', 'Unicorn');
-  new Product('images/usb.gif', 'USB');
-  new Product('images/water-can.jpg', 'Water Can');
-  new Product('images/wine-glass.jpg', 'Wine Glass');
+
+for (var i = 0; i < images.length; i++) {
+  new Products(images[i]);
+}
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Initialize the app by creating the big list of products with images and names
-generateCatalog();
+
+function updateProducts() {
+  var productupdate= JSON.stringify(Products.all);
+  localStorage.setItem('objectorders', productupdate);
+}
+
+
+function getProducts() {
+  var productupdate = localStorage.getItem('objectorders');
+ 
+  if(productupdate) {
+    Products.all = JSON.parse(productupdate);
+  
+    runder();
+    
+    render2();
+    render3();
+
+  }
+}
+
+
+
+
+//var imgid = [];
+var leftproduct, centerproduct, rightproduct;
+function runder() {
+
+  leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+  //console.log(leftproduct);
+  centerproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+  //console.log(centerproduct);
+  rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+
+  while (leftproduct.name === centerproduct.name || leftproduct.name === rightproduct.name || rightproduct.name === centerproduct.name) {
+
+    leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+    centerproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+    rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
+  }
+//   if ( imgid.includes(leftproduct.imagePath )|| imgid.includes(rightproduct.imagePath) || imgid.includes(centerproduct.imagePath)){
+// runder();
+//   }
+
+
+  //console.log(leftproduct.imagepath===centerproduct.imagePath );
+  //console.log(leftproduct.imagePath===rightproduct.imagePath );
+  //console.log(rightproduct.imagePath===centerproduct.imagePath );
+  leftImage.setAttribute('src', leftproduct.imagePath);
+  leftImage.setAttribute('alt', leftproduct.name);
+  leftImage.setAttribute('title', leftproduct.name);
+
+  centerImage.setAttribute('src', centerproduct.imagePath);
+  centerImage.setAttribute('alt', centerproduct.name);
+  centerImage.setAttribute('title', centerproduct.name);
+
+  rightImage.setAttribute('src', rightproduct.imagePath);
+  rightImage.setAttribute('alt', rightproduct.name);
+  rightImage.setAttribute('title', rightproduct.name);
+
+  // imgid[0] = leftProduct.imagePath;
+  // imgid[1] = centerProduct.imagePath;
+  // imgid[2] = rightProduct.imagePath;
+
+}
+runder();
+imageSection.addEventListener('click', handleClickOnProduct);
+var totalClicks = 0;
+function handleClickOnProduct(event) {
+  if (totalClicks < 25) {
+
+    if (event.target.id !== 'mainpictures') {
+      if (event.target.id === 'leftImage') {
+        leftproduct.clicks++;
+      }
+      else if (event.target.id === 'centerimage') {
+        centerproduct.clicks++;
+      } else if (event.target.id === 'rightImage') {
+        rightproduct.clicks++;
+      }
+
+      totalClicks++;
+      leftproduct.views++;
+      rightproduct.views++;
+      centerproduct.views++;
+     updateProducts() ;
+      runder();
+    }
+  } else {
+    alert('more than 25 clicks');
+    imageSection.removeEventListener('click', handleClickOnProduct);
+   // render2();
+    render3();
+    updateProducts() ;
+  }
+
+}
+
+function render2() {
+  var ulE1 = document.getElementById('Score');
+  for (var i =0; i<Products.all.length ; i++) {
+    var liE1 = document.createElement('li');
+    liE1.textContent = `${Products.all[i].name} has ${Products.all[i].clicks} clicks and ${Products.all[i].views} views`;
+    ulE1.appendChild(liE1);
+  }
+
+}
+var contct = [];
+var cliccks = [];
+var names = [];
+var votes=[];
+
+function render3() {
+
+  for (var i = 0; i < Products.all.length; i++) {
+    //console.log(Products.all[i])
+    var contct = Products.all[i];
+    names.push(contct.name);
+    cliccks.push(contct.clicks);
+    votes.push(contct.views);
+
+  }
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: '# of clicks',
+        data: cliccks,
+
+        backgroundColor:
+          'rgba(255, 99, 132, 0.2)',
+
+
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        
+        borderWidth: 1
+      },
+      {
+        label: '# views',
+        data: votes,
+
+        backgroundColor:
+          'rgba(40, 99, 132, 0.2)',
+
+
+        borderColor: [
+          'rgba(150, 30, 40, 1)',
+          'rgba(30, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        
+        borderWidth: 1
+      }]
+      
+
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  })
+}
+getProducts();
