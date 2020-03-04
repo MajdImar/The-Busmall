@@ -46,22 +46,7 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// function takeelement(){
-//   var takeobject=JSON.stringify(Products.all);
- 
-//   localStorage.setItem('Products', takeobject);
-// }
 
-// function getProducts() {
-//   var takeobject = localStorage.getItem('Products');
- 
-//   if(takeobject) {
-//     Products.all = JSON.parse(takeobject);
-  
-  
-
-//   }
-// }
 function updateProducts() {
   var productupdate= JSON.stringify(Products.all);
   localStorage.setItem('objectorders', productupdate);
@@ -148,7 +133,7 @@ function handleClickOnProduct(event) {
       leftproduct.views++;
       rightproduct.views++;
       centerproduct.views++;
-      updateProducts() ;
+      //updateProducts() ;
       runder();
     }
   } else {
@@ -193,7 +178,7 @@ function render3() {
     data: {
       labels: names,
       datasets: [{
-        label: '# of Votes',
+        label: '# of clicks',
         data: cliccks,
 
         backgroundColor:
@@ -212,7 +197,7 @@ function render3() {
         borderWidth: 1
       },
       {
-        label: '# of Votes',
+        label: '# views',
         data: votes,
 
         backgroundColor:
