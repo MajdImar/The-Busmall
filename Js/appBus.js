@@ -90,10 +90,6 @@ function runder() {
 // runder();
 //   }
 
-
-  //console.log(leftproduct.imagepath===centerproduct.imagePath );
-  //console.log(leftproduct.imagePath===rightproduct.imagePath );
-  //console.log(rightproduct.imagePath===centerproduct.imagePath );
   leftImage.setAttribute('src', leftproduct.imagePath);
   leftImage.setAttribute('alt', leftproduct.name);
   leftImage.setAttribute('title', leftproduct.name);
