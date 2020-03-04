@@ -1,9 +1,20 @@
 body {
     background:wheat;
   }
+  main{
+    border: 5px solid purple;
+    padding: 100px;
+  } 
+  main h1{
+    text-align: center;
+    color: rosybrown;
+    text-shadow: slateblue;
+    font-size: xx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
   header {
     text-align: center;
-    border: 5px solid coral;
+    border: 5px solid plum;
     color: white;
     margin-bottom: 40px;
   }
@@ -16,7 +27,7 @@ body {
   }
   header nav ul li a {
     text-decoration: none;
-    color: coral;
+    color: plum;
     font-size: 25px;
     font-weight: 100;
   }
@@ -31,9 +42,19 @@ body {
   img {
     width: 300px;
     height: 300px;
-    border: 10px solid greenyellow;
+    border: 10px solid palevioletred;
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
   }
+body #Score {
+    text-decoration: rgb(218, 26, 147);
+   font-family: sans-serif;
   
+border:5px palevioletred;
+/* background-color: palevioletred; */
+
+
+ 
+
+  }

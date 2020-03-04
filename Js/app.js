@@ -60,17 +60,15 @@ function getProducts() {
     Products.all = JSON.parse(productupdate);
   
     runder();
-    render3();
+    
     render2();
+    render3();
 
   }
 }
 
 
-// function updateDrinks() {
-//   var drinkString = JSON.stringify(Coffee.drinks);
-//   localStorage.setItem('coffeeOrders', drinkString);
-// }
+
 
 //var imgid = [];
 var leftproduct, centerproduct, rightproduct;
@@ -133,14 +131,13 @@ function handleClickOnProduct(event) {
       leftproduct.views++;
       rightproduct.views++;
       centerproduct.views++;
-      //updateProducts() ;
+     updateProducts() ;
       runder();
     }
   } else {
     alert('more than 25 clicks');
     imageSection.removeEventListener('click', handleClickOnProduct);
-    //render2();
-    //takeelement();
+   // render2();
     render3();
     updateProducts() ;
   }
