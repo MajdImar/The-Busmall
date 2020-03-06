@@ -1,4 +1,4 @@
-
+var seq=[];
 var images = [
   "bag.jpg",
   "banana.jpg",
@@ -38,29 +38,30 @@ function Products(name) {
 }
 Products.all = [];
 
-
+//to create new object 
 for (var i = 0; i < images.length; i++) {
   new Products(images[i]);
 }
+//generate random number
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+//to convert the object to json so the server can understand it
 
 function updateProducts() {
-  var productupdate= JSON.stringify(Products.all);
+  var productupdate = JSON.stringify(Products.all);
   localStorage.setItem('objectorders', productupdate);
 }
 
-
+//to convert the object to json so from the  server 
 function getProducts() {
   var productupdate = localStorage.getItem('objectorders');
- 
-  if(productupdate) {
+
+  if (productupdate) {
     Products.all = JSON.parse(productupdate);
-  
+
     runder();
-    
+
     render2();
     render3();
 
@@ -69,8 +70,7 @@ function getProducts() {
 
 
 
-
-//var imgid = [];
+//show 3 different images
 var leftproduct, centerproduct, rightproduct;
 function runder() {
 
@@ -80,15 +80,18 @@ function runder() {
   //console.log(centerproduct);
   rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
 
-  while (leftproduct.name === centerproduct.name || leftproduct.name === rightproduct.name || rightproduct.name === centerproduct.name) {
+  while (leftproduct.name === centerproduct.name || leftproduct.name === rightproduct.name || rightproduct.name === centerproduct.name
+    ) {
 
+      console.log(leftproduct.name);
     leftproduct = Products.all[randomNumber(0, Products.all.length - 1)];
     centerproduct = Products.all[randomNumber(0, Products.all.length - 1)];
     rightproduct = Products.all[randomNumber(0, Products.all.length - 1)];
   }
-//   if ( imgid.includes(leftproduct.imagePath )|| imgid.includes(rightproduct.imagePath) || imgid.includes(centerproduct.imagePath)){
-// runder();
-//   }
+  
+  // runder();
+  //   
+  // || seq.includes(leftProduct.name )|| seq.includes(centerProduct.name) ||seq.includes(rightProduct.name)
 
   leftImage.setAttribute('src', leftproduct.imagePath);
   leftImage.setAttribute('alt', leftproduct.name);
@@ -102,12 +105,14 @@ function runder() {
   rightImage.setAttribute('alt', rightproduct.name);
   rightImage.setAttribute('title', rightproduct.name);
 
-  // imgid[0] = leftProduct.imagePath;
-  // imgid[1] = centerProduct.imagePath;
-  // imgid[2] = rightProduct.imagePath;
+  // seq[0] = leftProduct.imagePath;
+  // console.log(seq);
+  // // seq[1] = centerProduct.name;
+  // // seq[2] = rightProduct.name;
 
 }
 runder();
+//count the views and clicks after the event click
 imageSection.addEventListener('click', handleClickOnProduct);
 var totalClicks = 0;
 function handleClickOnProduct(event) {
@@ -127,22 +132,23 @@ function handleClickOnProduct(event) {
       leftproduct.views++;
       rightproduct.views++;
       centerproduct.views++;
-     updateProducts() ;
+      updateProducts();
       runder();
     }
   } else {
     alert('more than 25 clicks');
     imageSection.removeEventListener('click', handleClickOnProduct);
-  //  render2();
+    //  render2();
     render3();
-    updateProducts() ;
+    updateProducts();
   }
 
 }
+//sshow result in list
 
 function render2() {
   var ulE1 = document.getElementById('Score');
-  for (var i =0; i<Products.all.length ; i++) {
+  for (var i = 0; i < Products.all.length; i++) {
     var liE1 = document.createElement('li');
     liE1.textContent = `${Products.all[i].name} has ${Products.all[i].clicks} clicks and ${Products.all[i].views} views`;
     ulE1.appendChild(liE1);
@@ -152,8 +158,8 @@ function render2() {
 var contct = [];
 var cliccks = [];
 var names = [];
-var votes=[];
-
+var votes = [];
+//show result in chart
 function render3() {
 
   for (var i = 0; i < Products.all.length; i++) {
@@ -186,7 +192,7 @@ function render3() {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)'
         ],
-        
+
         borderWidth: 1
       },
       {
@@ -205,10 +211,10 @@ function render3() {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)'
         ],
-        
+
         borderWidth: 1
       }]
-      
+
 
     },
     options: {
